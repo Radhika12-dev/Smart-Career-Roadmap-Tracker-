@@ -1,0 +1,23 @@
+# .gitignore file
+
+# Python
+*.pyc
+__pycache__/
+
+# Django
+*.log
+*.pot
+*.pyc
+*.sqlite3
+db.sqlite3
+
+# Environment files
+.env
+
+# VSCode settings
+.vscode/
+
+# Django migrations
+*/migrations/*
+
+
