@@ -4,6 +4,9 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import *
 from django.contrib.auth import authenticate
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class UserRegistrationAPIView(APIView):
     def post(self, request):
@@ -29,4 +32,12 @@ class UserLoginAPIView(APIView):
             return Response({"error": "Invalid credentials"}, status = status.HTTP_401_UNAUTHORIZED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
         
-            
+         
+class ProfileView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    def get(self, request):
+        user = request.user
+        return Response({
+            'email' : user.email,
+            'username' : user.username,
+        })
